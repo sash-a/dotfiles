@@ -53,8 +53,6 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 # export MUJOCO_PY_MJPRO_PATH=/home/sasha/.mujoco/mjpro131
 # export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libGLEW.so
 
-# Neptune
-export NEPTUNE_API_TOKEN="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vbmV3LXVpLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9uZXctdWkubmVwdHVuZS5haSIsImFwaV9rZXkiOiIzNWY5Y2M4MC1jNTRlLTQxYjQtYWM2MS1mYzczM2I4ZTM2MjQifQ=="
 # Tensorflow datasets
 export TFDS_DATA_DIR=~/tensorflow_datasets
 # JAX
