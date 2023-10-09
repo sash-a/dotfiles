@@ -52,3 +52,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 	group = highlight_group,
 	pattern = '*',
 })
+
+-- magma (python notebooks)
+vim.g.magma_image_provider = "kitty"

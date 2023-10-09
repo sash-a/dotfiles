@@ -1,31 +1,3 @@
--- return {
---   {
---     {
---       "dccsillag/magma-nvim",
---       lazy = false,
---       version = "*",
---       build = "UpdateRemotePlugins",
---
---       keys = {
---         {
---           "<leader>ji",
---           "<cmd>MagmaInit<CR>",
---           desc =
---           "This command initializes a runtime for the current buffer."
---         },
---         { "<leader>jr",  "<cmd>MagmaEvaluateOperator<CR>", desc = "Evaluate the current operator." },
---         { "<leader>jrl", "<cmd>MagmaEvaluateLine<CR>",     desc = "Evaluate the current line." },
---         { "<leader>jrv", "<cmd>MagmaEvaluateVisual<CR>",   desc = "Evaluate the selected text." },
---         { "<leader>js",  "<cmd>MagmaShowOutput<CR>",       desc = "Show the output of the current buffer." },
---         { "<leader>jre", "<cmd>MagmaReevaluateCell<CR>",   desc = "Reevaluate the current cell." },
---         { "<leader>jd",  "<cmd>MagmaDelete<CR>",           desc = "Delete the current cell." },
---       },
---     }
---   }
--- }
--- magma
--- vim.g.magma_automatically_open_output = true
--- vim.g.magma_image_provider = "kitty"
 return {
   {
     "dccsillag/magma-nvim",
@@ -34,68 +6,58 @@ return {
     lazy = false,
     keys = {
       {
-        "<leader>jr",
-        "<cmd>MagmaEvaluateOperator<CR>",
-        desc = "Evaluate given operator",
-        {
-          noremap = true,
-          expr = true,
-          silent = true,
-        },
-      },
-      {
-        "<leader>ji",
-        "<cmd>MagmaInit<CR>",
+        "<leader>ni",
+        "<cmd>MagmaInit python3<CR>",
         desc =
-        "Initializes a runtime for the current buffer."
+        "[N]otebook [I]nit",
+        {
+          noremap = true,
+          silent = true,
+        },
       },
       {
-        "<leader>jrl",
+        "<leader>nrl",
         "<cmd>MagmaEvaluateLine<CR>",
-        desc = "Evaluate the current line.",
+        desc = "[N]otebook [R]un [L]ine",
         {
           noremap = true,
-          expr = true,
           silent = true,
         },
       },
       {
-        "<leader>jrv",
+        "<leader>nrv",
         "<cmd>MagmaEvaluateVisual<CR>",
-        desc = "Evaluate the selected text.",
+        mode = "v",
+        desc = "[N]otebook [R]un [V]isual",
         {
           noremap = true,
-          expr = true,
           silent = true,
         },
       },
       {
-        "<leader>js",
+        "<leader>ns",
         "<cmd>MagmaShowOutput<CR>",
-        desc = "Show the output of the current buffer.",
+        desc = "[N]otebook [S]how output",
         {
           noremap = true,
-          expr = true,
           silent = true,
         },
       },
       {
-        "<leader>jre",
+        "<leader>nrr",
         "<cmd>MagmaReevaluateCell<CR>",
-        desc = "Reevaluate the current cell.",
+        desc = "[N]otebook [R]e[r]un cell",
         {
           noremap = true,
-          expr = true,
           silent = true,
         },
       },
       {
-        "<leader>jd",
+        "<leader>nd",
         "<cmd>MagmaDelete<CR>",
-        desc = "Delete the current cell.",
+        desc = "[N]otebook [D]elete cell",
         {
           noremap = true,
-          expr = true,
           silent = true,
         },
       }
