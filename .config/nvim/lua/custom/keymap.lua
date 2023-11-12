@@ -6,7 +6,6 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<C-s>', ':w <cr>', { desc = '[S]ave (and format)' })
 vim.keymap.set('n', '<C-w>', ':bw <cr>', { desc = 'Buffer [W]ipeout' })
 vim.keymap.set('n', '<C-q>', ':q <cr>', { desc = '[Q]uit' })
-vim.keymap.set('n', '<leader>lf', ':lua vim.lsp.buf.format() <cr>', { desc = 'Lsp [F]ormat' })
 
 vim.keymap.set('i', 'jj', '<Esc>', { desc = 'Escape' })
 vim.keymap.set('i', '<C-s>', '<Esc>:w<cr>', { desc = 'Escape' })
@@ -16,9 +15,6 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>de', vim.diagnostic.open_float, { desc = 'Open floating [d]iagnostic [e]rror message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-
--- nvim tree
-vim.keymap.set('n', '<leader>e', ':NvimTreeToggle <cr>', { desc = 'File [E]xplorer' })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -36,9 +32,6 @@ vim.keymap.set('n', '<C-Left>', ':vertical resize -5 <cr>')
 vim.keymap.set('n', '<C-Up>', ':resize +5 <cr>')
 vim.keymap.set('n', '<C-Down>', ':resize -5 <cr>')
 
--- undotree
--- vim.keymap.set('n', '<leader>u', ':UndotreeToggle<cr>', { desc = '[U]ndo Tree Togggle' })
-
 -- copilot
-vim.cmd [[imap <silent><script><expr> <C-a> copilot#Accept("\<CR>")]]
-vim.g.copilot_no_tab_map = true
+-- vim.cmd [[imap <silent><script><expr> <C-a> copilot#Accept("\<CR>")]]
+-- vim.g.copilot_no_tab_map = true

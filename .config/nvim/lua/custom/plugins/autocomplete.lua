@@ -13,15 +13,19 @@ return {
       },
       opts = function()
         vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+
         local cmp = require("cmp")
+        local luasnip = require("luasnip")
         local defaults = require("cmp.config.default")()
+        require('luasnip.loaders.from_vscode').lazy_load()
+
         return {
-          completion = {
-            completeopt = "menu,menuone,noinsert",
-          },
+          --completion = {
+          -- completeopt = "menu,menuone,noinsert",
+          --},
           snippet = {
             expand = function(args)
-              require("luasnip").lsp_expand(args.body)
+              luasnip.lsp_expand(args.body)
             end,
           },
           mapping = cmp.mapping.preset.insert({
@@ -40,6 +44,24 @@ return {
               cmp.abort()
               fallback()
             end,
+            ['<Tab>'] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_next_item()
+              elseif luasnip.expand_or_locally_jumpable() then
+                luasnip.expand_or_jump()
+              else
+                fallback()
+              end
+            end, { 'i', 's' }),
+            ['<S-Tab>'] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_prev_item()
+              elseif luasnip.locally_jumpable(-1) then
+                luasnip.jump(-1)
+              else
+                fallback()
+              end
+            end, { 'i', 's' }),
           }),
           sources = cmp.config.sources({
             { name = "nvim_lsp" },
@@ -66,5 +88,12 @@ return {
         require("cmp").setup(opts)
       end,
     },
+  },
+  {
+    {
+      "L3MON4D3/LuaSnip",
+      -- follow latest release.
+      version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    }
   }
 }
