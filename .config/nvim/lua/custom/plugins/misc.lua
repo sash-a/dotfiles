@@ -7,13 +7,13 @@ return {
   { 'folke/neodev.nvim', opts = {} },
   -- Automatically makes bracket pairs
   { 'windwp/nvim-autopairs', opts = {} },
-  -- Cool icons
-  { 'nvim-tree/nvim-web-devicons' },
   {
     'echasnovski/mini.surround',
     version = '*',
     config = function()
       require('mini.surround').setup {
+        highlight_duration = 1000,
+        n_lines = 100,
         mappings = {
           add = 'gsa', -- Add surrounding in Normal and Visual modes
           delete = 'gsd', -- Delete surrounding
@@ -32,8 +32,9 @@ return {
     opts = {},
     keys = { { '<leader>e', ':lua MiniFiles.open()<cr>', desc = 'File browser' } },
   },
+  { 'echasnovski/mini.cursorword', version = '*', opts = {} },
   { 'echasnovski/mini.starter', version = '*', opts = {} },
   { 'echasnovski/mini.comment', version = '*', opts = {} },
   { 'echasnovski/mini.animate', version = '*', opts = {} },
-  { 'echasnovski/mini.indentscope', version = '*', opts = { symbol = '│' } },
+  { 'echasnovski/mini.indentscope', version = '*', opts = { symbol = '│', options = { try_as_border = true } } },
 }
