@@ -80,3 +80,4 @@ unset __conda_setup
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f "/home/sash/.ghcup/env" ] && source "/home/sash/.ghcup/env" # ghcup-env
+

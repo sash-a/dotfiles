@@ -77,7 +77,17 @@ return {
           },
         },
       }
-    end
+    end,
   },
-  { 'nvim-treesitter/nvim-treesitter-context' }
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    keys = {
+      {
+        '<leader>ct',
+        ':TSContextToggle<cr>',
+        mode = { 'n', 'v' },
+        desc = 'Toggle function context',
+      },
+    },
+  },
 }
