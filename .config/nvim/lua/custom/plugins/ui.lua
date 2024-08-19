@@ -64,7 +64,10 @@ return {
       { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll backward", mode = {"i", "n", "s"}},
     },
   },
-  { 'dressing.nvim' },
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
   { 'MunifTanjim/nui.nvim', lazy = true },
   -- Cool icons
   { 'nvim-tree/nvim-web-devicons' },

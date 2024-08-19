@@ -11,27 +11,18 @@ export TERM="xterm-256color" # This sets up colors properly
 export SHELL=/usr/bin/zsh
 source ~/.profile
 
-
 export ZSH=$HOME/.oh-my-zsh
 
-
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
 
 DISABLE_MAGIC_FUNCTIONS=true
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 COMPLETION_WAITING_DOTS=true
 DISABLE_UNTRACKED_FILES_DIRTY=true
 
-
 plugins=(zsh-autosuggestions git zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
-
-# TILIX
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-        source /etc/profile.d/vte.sh
-fi
 
 # nvim alias
 alias vim="nvim"
@@ -47,17 +38,14 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 # swap capslock and escape
 /usr/bin/setxkbmap -option "caps:swapescape"
 
-# MUJOCO
-# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/sasha/.mujoco/mujoco200/bin
-# export MUJOCO_KEY_PATH=/home/sasha/.mujoco/mjkey.txt
-# export MUJOCO_PY_MJPRO_PATH=/home/sasha/.mujoco/mjpro131
-# export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libGLEW.so
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Tensorflow datasets
-export TFDS_DATA_DIR=~/tensorflow_datasets
 # JAX
 XLA_PYTHON_CLIENT_PREALLOCATE=false
 # XLA_PYTHON_CLIENT_MEM_FRACTION=.6
+
 # PATH
 export PATH=$PATH:~/bin:~/.local/bin
 
@@ -80,4 +68,3 @@ unset __conda_setup
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f "/home/sash/.ghcup/env" ] && source "/home/sash/.ghcup/env" # ghcup-env
-
