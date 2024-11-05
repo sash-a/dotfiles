@@ -7,7 +7,7 @@ vim.keymap.set('n', '<C-s>', ':w <cr>', { desc = '[S]ave (and format)' })
 vim.keymap.set('n', '<C-w>', ':bw <cr>', { desc = 'Buffer [W]ipeout' })
 vim.keymap.set('n', '<C-q>', ':q <cr>', { desc = '[Q]uit' })
 
-vim.keymap.set('i', 'jj', '<Esc>', { desc = 'Escape' })
+-- vim.keymap.set('i', 'jj', '<Esc>', { desc = 'Escape' })
 vim.keymap.set('i', '<C-s>', '<Esc>:w<cr>', { desc = 'Escape' })
 
 -- Diagnostic keymaps
