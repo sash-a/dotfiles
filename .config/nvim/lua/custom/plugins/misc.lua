@@ -37,4 +37,11 @@ return {
   { 'echasnovski/mini.comment', version = '*', opts = {} },
   { 'echasnovski/mini.animate', version = '*', opts = {} },
   { 'echasnovski/mini.indentscope', version = '*', opts = { symbol = '│', options = { try_as_border = true } } },
+  { 
+    'echasnovski/mini.ai', 
+    version = false,
+    config = function ()
+      require('mini.ai').setup()
+    end,
+  },
 }

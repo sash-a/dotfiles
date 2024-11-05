@@ -70,5 +70,13 @@ return {
   },
   { 'MunifTanjim/nui.nvim', lazy = true },
   -- Cool icons
-  { 'nvim-tree/nvim-web-devicons' },
+  {
+    'echasnovski/mini.icons',
+    version = false,
+    lazy = false,
+    config = function ()
+      require('mini.icons').setup()
+    end,
+  },
+  -- { 'nvim-tree/nvim-web-devicons' },
 }
