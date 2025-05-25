@@ -1,0 +1,12 @@
+# This is the configuration file for Ghostty.
+font-family = FiraCodeNerdFont
+font-size = 13.0
+
+background-opacity = 0.8
+window-decoration = none
+
+cursor-style = block
+shell-integration-features = no-cursor
+
+# TODO: everforrest?
+theme=rose-pine
