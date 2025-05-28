@@ -15,6 +15,10 @@ export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
+
+plugins=(zsh-autosuggestions git zsh-syntax-highlighting fzf-tab)
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=4'
 DISABLE_MAGIC_FUNCTIONS=true
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 COMPLETION_WAITING_DOTS=true
@@ -35,8 +39,6 @@ setopt hist_find_no_dups
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --icons=always -1 $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --icons=always -1 $realpath'
-
-plugins=(zsh-autosuggestions git zsh-syntax-highlighting fzf-tab)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -70,9 +72,11 @@ export NVM_DIR="$HOME/.nvm"
 # XLA_PYTHON_CLIENT_PREALLOCATE=false
 # XLA_PYTHON_CLIENT_MEM_FRACTION=.6
 
+# Secrets
+source ~/.env
+
 # PATH
 export PATH=$PATH:~/bin:~/.local/bin
-source ~/.env
 export QTILE_DEVICE_TYPE=desktop
 export EZA_CONFIG_DIR=~/.config/eza/
 
