@@ -25,20 +25,22 @@
 # SOFTWARE.
 
 import os
+import shutil
 import subprocess
-from libqtile import bar, layout, qtile, hook
+
+from libqtile import bar, hook, layout, qtile
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
-
 from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration
+from qtile_extras.widget.groupbox2 import GroupBoxRule
 
 mod = "mod4"
 terminal = "ghostty"  # guess_terminal()
+home = os.path.expanduser("~")
 
-mod = "mod4"
-terminal = "ghostty"  # guess_terminal()
+has_nvidia_gpu = shutil.which("nvidia-smi") is not None
+is_laptop = os.environ.get("QTILE_DEVICE_TYPE", "desktop") == "laptop"
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -98,23 +100,55 @@ keys = [
     ),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    # TODO: more custom rofi
-    # * brightness/volume/battery etc
+    # Rofi menus
     Key(
         [mod],
         "space",
         lazy.spawn(
-            "rofi -show drun -theme ~/.config/rofi/launchers/type-1/style-7.rasi"
+            f"rofi -show drun -theme {home}/.config/rofi/launchers/type-1/style-7.rasi"
         ),
         desc="Launch rofi",
+    ),
+    Key(
+        [mod],
+        "p",
+        lazy.spawn(f"{home}/.config/rofi/powermenu/type-1/powermenu.sh"),
+        desc="Launch Power Menu",
+    ),
+    Key(
+        [mod],
+        "m",
+        lazy.spawn(f"{home}/.config/rofi/applets/bin/mpd.sh"),
+        desc="Control Music",
+    ),
+    Key(
+        [mod],
+        "v",
+        lazy.spawn(f"{home}/.config/rofi/applets/bin/volume.sh"),
+        desc="Control Volume",
+    ),
+    # Misc hotkeys
+    Key(
+        ["mod1", "shift"],
+        "s",
+        lazy.spawn("flameshot gui"),
+        desc="Take a screenshot",
     ),
 ]
 
 
 groups = [
-    Group(name="", matches=[Match(wm_class="ghostty")]),
-    Group(name="󰈹", matches=[Match(wm_class="brave-browser")]),
-    Group(name="", matches=[Match(wm_class="Slack")]),
+    Group(name="1", matches=[Match(wm_class="ghostty")]),
+    Group(name="2", matches=[Match(wm_class="brave-browser")]),
+    Group(name="3", matches=[Match(wm_class="Slack")]),
+    Group(name="4", matches=[Match(wm_class="ncspot")]),
+    Group(name="5", matches=[Match(wm_class="steam")]),
+    Group(name="6"),
+    Group(name="7"),
+    Group(name="8"),
+    # Group(name="", matches=[Match(wm_class="ghostty")]),
+    # Group(name="󰈹", matches=[Match(wm_class="brave-browser")]),
+    # Group(name="", matches=[Match(wm_class="Slack")]),
 ]
 
 for i, group in enumerate(groups, 1):
@@ -163,7 +197,7 @@ layouts = [
 ]
 
 widget_defaults = {
-    "font": "Fira Sans Bold",
+    "font": "Fira Sans Mono",
     "fontsize": 17,
     "padding": 3,
 }
@@ -172,49 +206,155 @@ extension_defaults = widget_defaults.copy()
 decoration_group = {
     "decorations": [
         RectDecoration(
-            colour="#48584E", radius=10, filled=True, padding_y=0, group=True
+            colour="#48584E50",
+            radius=10,
+            filled=True,
+            padding_y=0,
+            group=True,
+            clip=True,
         )
     ],
-    "padding": 15,
 }
+
+
+rules = [
+    GroupBoxRule(text="◉").when(GroupBoxRule.SCREEN_THIS),
+    ~GroupBoxRule(text="○").when(GroupBoxRule.SCREEN_THIS),
+]
+
+widgets_left = [
+    widget.Spacer(length=15),
+    widget.GroupBox2(rules=rules, padding=5, **decoration_group),
+    # widget.GroupBox(
+    #     highlight_method="line",
+    #     highlight_color="#A7C080",
+    #     other_current_screen_border="#A7C080",
+    #     this_current_screen_border="#A7C080",
+    #     padding=15,
+    #     **decoration_group,
+    # ),
+]
+widgets_centre = [
+    widget.Clock(format="%d-%m %a %H:%M", fontsize=17, padding=15, **decoration_group)
+]
+
+# left widgets
+gpu_widget = widget.GenPollCommand(
+    cmd="nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
+    fmt="{:<2}%",
+    max_chars=10,
+    update_interval=1,
+    shell=True,
+    **decoration_group,
+)
+
+widgets_right = (
+    [
+        widget.Spacer(10, **decoration_group),
+        widget.Image(
+            filename="~/.config/qtile/icons/cpu-modified.png",
+            padding=1,
+            margin=5,
+            **decoration_group,
+        ),
+        # TODO: icons (needs to be images :/)
+        widget.CPU(
+            format="{load_percent:<3.1f}%",
+            max_chars=10,
+            **decoration_group,
+            padding=1,
+        ),
+        widget.Spacer(15, **decoration_group),
+        widget.Image(
+            filename="~/.config/qtile/icons/ram.png",
+            padding=1,
+            margin=3,
+            **decoration_group,
+        ),
+        widget.Memory(
+            format="{MemPercent:<2.0f}%",
+            max_chars=10,
+            padding=1,
+            **decoration_group,
+        ),
+        widget.Spacer(10, **decoration_group),
+    ]
+    + (
+        [
+            widget.Image(
+                filename="~/.config/qtile/icons/gpu.png",
+                padding=1,
+                margin=3,
+                **decoration_group,
+            ),
+            gpu_widget,
+            widget.Spacer(15, **decoration_group),
+        ]
+        if has_nvidia_gpu
+        else []
+    )
+    + [widget.Spacer(length=15)]
+    # TODO: check this works on laptop
+    + (
+        [
+            widget.Brightness(**decoration_group, padding=15),
+            widget.Battery(**decoration_group, padding=15),
+        ]
+        if is_laptop
+        else []
+    )
+    + [
+        # TODO:  this is moving the bar??
+        # Rofit widget on mouse click?
+        # widget.Net(
+        #     # format="    {down:.0f}{down_suffix} ↓↑ {up:.0f}{up_suffix}",
+        #     format="    {total:<3.0f} ↓↑",
+        #     min_width=500,
+        #     max_chars=20,
+        #     **decoration_group,
+        # ),
+        widget.Spacer(length=11, **decoration_group),
+        widget.Volume(fmt="{}", padding=10, **decoration_group),
+        widget.TextBox(
+            fmt="⏻",
+            max_chars=1,
+            mouse_callbacks={
+                "Button1": lambda: qtile.spawn(
+                    f"{home}/.config/rofi/powermenu/type-1/powermenu.sh"
+                )
+            },
+            padding=10,
+            **decoration_group,
+        ),
+        widget.Spacer(length=15, **decoration_group),
+        widget.Spacer(length=15),
+    ]
+)
+widgets = [
+    *widgets_left,
+    widget.Spacer(length=bar.STRETCH),
+    *widgets_centre,
+    widget.Spacer(length=bar.STRETCH),
+    *widgets_right,
+]
+
 screens = [
     Screen(
         top=bar.Bar(
-            [
-                widget.Spacer(length=15),
-                widget.GroupBox(
-                    highlight_method="line",
-                    highlight_color="#A7C080",
-                    other_current_screen_border="#A7C080",
-                    this_current_screen_border="#A7C080",
-                    **decoration_group,
-                ),
-                widget.Spacer(length=bar.STRETCH, background="#00000000"),
-                widget.Clock(format="%d-%m %a %H:%M", fontsize=17, **decoration_group),
-                widget.Spacer(length=bar.STRETCH),
-                widget.CPU(
-                    format="CPU: {load_percent}%", **decoration_group
-                ),  # TODO: icons (needs to be images :/)
-                widget.Memory(
-                    format="Mem: {MemPercent:.0f}%", **decoration_group
-                ),  # TODO: icons
-                # TODO: Volume/brightness/battery as rofi widget
-                # TODO: GPU usage
-                widget.Spacer(length=15),
-            ],
+            widgets,
             32,
             background="#00000000",
             margin=[4, 4, 4, 4],
         ),
+        wallpaper=f"{home}/Pictures/fog_forest_1.png",
+        wallpaper_mode="stretch",
+        bottom=bar.Gap(5),
+        left=bar.Gap(5),
+        right=bar.Gap(5),
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
         # x11_drag_polling_rate = 60,
-        wallpaper="~/Pictures/water-steam-fog-greenery-8k-wp-2560x1080.jpg",
-        # wallpaper_mode="",
-        bottom=bar.Gap(5),
-        left=bar.Gap(5),
-        right=bar.Gap(5),
     ),
 ]
 
@@ -278,5 +418,5 @@ wmname = "LG3D"
 
 @hook.subscribe.startup_once
 def autostart():
-    script = os.path.expanduser("~/.config/qtile/autostart.sh")
+    script = os.path.expanduser(f"{home}/.config/qtile/autostart.sh")
     subprocess.run([script])

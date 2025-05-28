@@ -1,0 +1,51 @@
+[global]
+  monitor = 1
+  follow = mouse
+
+  frame_width = 2
+  geometry = "0x0-15+50"
+  padding = 10
+  horizontal_padding = 20
+  font = Fira Code Nerd Font Medium 15
+
+  # transparency = 20
+  frame_color = "#eeeee4"
+  # highlight = "#74c7ec"
+  background = "#2B3339"
+  foreground = "#D9D7D6"
+
+  separator_color = auto
+  separator_height = 2
+
+  corner_radius = 5
+  progress_bar_corner_radius = 5
+  corners = top-left,bottom
+  progress_bar_corners = top-left,bottom-right
+  #offset = (15, 25)
+  #gap_size = 5
+
+  format = "<b>󰁕 %a</b>\n%s\n<i>%b</i>"
+
+  # icon_position = left
+  # text_icon_padding = 5
+  # min_icon_size = 0
+  # max_icon_size = 32
+  # icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/:/usr/share/icons/Adwaita/16x16/mimetypes/:/usr/share/icons/Adwaita/48x48/status/:/usr/share/icons/Adwaita/16x16/devices/:/usr/share/icons/Adwaita/48x48/notifications/:/usr/share/icons/Adwaita/48x48/emblems/
+
+  stack_duplicates = true
+  show_indicators = yes
+
+  dmenu = /usr/bin/env rofi -dmenu -p 'dunst:'
+  browser = /usr/bin/xdg-open
+
+[urgency_low]
+  background = "#2B3339"
+  foreground = "#D9D7D6"
+
+[urgency_normal]
+  background = "#2B3339"
+  foreground = "#D9D7D6"
+
+[urgency_critical]
+  background = "#061115"
+  foreground = "#D9D7D6"

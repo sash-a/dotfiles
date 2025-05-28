@@ -5,8 +5,10 @@ font-size = 13.0
 background-opacity = 0.8
 window-decoration = none
 
-cursor-style = block
-shell-integration-features = no-cursor
+shell-integration = zsh
+shell-integration-features = cursor,sudo,title
 
-# TODO: everforrest?
-theme=rose-pine
+cursor-style = block
+
+theme = everforrest-dark
+
