@@ -2,7 +2,7 @@
 font-family = FiraCodeNerdFont
 font-size = 13.0
 
-background-opacity = 0.8
+background-opacity = 1.0
 window-decoration = none
 
 shell-integration = zsh
@@ -12,3 +12,10 @@ cursor-style = block
 
 theme = everforrest-dark
 
+# window-height = 800
+maximize = true
+resize-overlay = always
+
+keybind = ctrl+shift+t=unbind
+keybind = ctrl+shift+left=unbind
+keybind = ctrl+shift+right=unbind
