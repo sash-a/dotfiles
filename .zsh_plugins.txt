@@ -6,15 +6,15 @@ zsh-users/zsh-completions kind:fpath path:src
 aloxaf/fzf-tab
 
 # Completion styles
-belak/zsh-utils path:completion/functions kind:autoload post:compstyle_zshzoo_setup
+# belak/zsh-utils path:completion/functions kind:autoload post:compstyle_zshzoo_setup
 
 # History
-belak/zsh-utils path:history
+# belak/zsh-utils path:history
 
 # Prompt
 romkatv/powerlevel10k
 
-ohmyzsh/ohmyzsh path:plugins/extract
+# ohmyzsh/ohmyzsh path:plugins/extract
 
 # Other Fish-like features
 zdharma-continuum/fast-syntax-highlighting  # Syntax highlighting

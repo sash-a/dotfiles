@@ -56,6 +56,12 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --icons=always -1 $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --icons=always -1 $realpath'
 
+# Home/end/forward/back word is blocked by one of the plugins
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+
 # swap capslock and escape
 # /usr/bin/setxkbmap -option "caps:swapescape"
 
