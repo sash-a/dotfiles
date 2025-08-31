@@ -1,34 +1,3 @@
-return {
-  -- {
-  --   "folke/tokyonight.nvim",
-  --   opts = {
-  --     transparent = true,
-  --     styles = {
-  --       sidebars = "transparent",
-  --       floats = "transparent",
-  --     },
-  --   },
-  -- },
-
-  {
-    "neanias/everforest-nvim",
-    version = false,
-    lazy = false,
-    priority = 1000, -- make sure to load this before all the other start plugins
-    -- Optional; default configuration will be used if setup isn't called.
-    config = function()
-      require("everforest").setup({
-        transparent_background_level = 2,
-        ui_contrast = "high",
-      })
-    end,
-  },
-
-  -- Configure LazyVim to load gruvbox
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "everforest",
-    },
-  },
-}
+MiniDeps.add("neanias/everforest-nvim")
+require('everforest').setup({ ui_contrast = "high" })
+vim.cmd [[colorscheme everforest]]

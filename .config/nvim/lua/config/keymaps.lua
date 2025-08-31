@@ -1,24 +1,23 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
--- Quit
-vim.keymap.set("n", "<C-q>", ":q <cr>", { desc = "[Q]uit" })
--- Close buffer
-vim.keymap.set("n", "<leader>bd", function()
-  Snacks.bufdelete()
-end, { desc = "Delete Buffer" })
+-- Session management
+vim.keymap.set("n", "<C-q>", ":q<cr>", { desc = "[Q]uit" })
+vim.keymap.set({ "i", "n" }, "<C-s>", "<esc>:w<cr>", { desc = "[S]ave" })
+vim.keymap.set("n", "<leader>bd", ':lua MiniBufremove.delete()<CR>', { desc = "[B]uffer [d]elete" })
+vim.keymap.set("n", "<leader>bD", ":bw<CR>", { desc = "[B]uffer [w]ipeout" })
 
--- Expand LSP error
-vim.keymap.set("n", "<leader>de", vim.diagnostic.open_float, { desc = "Open floating [d]iagnostic [e]rror message" })
+-- navigation
+vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Switch to lower pane' })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Switch to upper pane' })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Switch to right pane' })
+vim.keymap.set('n', '<leader>e', ':lua MiniFiles.open()<CR>', { desc = 'File [e]xplorer' })
 
--- Terminal
-vim.keymap.del("n", "<leader>fT")
-vim.keymap.del("n", "<leader>ft")
+vim.keymap.set('n', '<Leader>-', ':sp<CR>', { desc = "Split down", noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>|', ':vsp<CR>', { desc = "Split right", noremap = true, silent = true })
 
-vim.keymap.set("n", "<leader>tb", function()
-  Snacks.terminal(nil, { cwd = LazyVim.root(), win = { position = "bottom" } })
-end, { desc = "Terminal bottom" })
-
-vim.keymap.set("n", "<leader>tf", function()
-  Snacks.terminal(nil, { cwd = LazyVim.root(), win = { position = "float" } })
-end, { desc = "Terminal float" })
+-- LSP
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = '[G]o to [d]efinition' })
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = '[G]o to [d]eclaration' })
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Show hover' })
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = '[G]o to [i]mplementation' })
+vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = '[G]o to [r]eferences' })
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [a]ction' })
+vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Switch to left pane' })
