@@ -21,14 +21,24 @@ export SHELL=/usr/bin/zsh
 export EDITOR=nvim
 source ~/.profile
 
+# Activate homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# Point to the correct ZSH otherwise it picks /usr/bin/zsh
+SHELL=/home/linuxbrew/.linuxbrew/bin/zsh
+
 # Autosuggestion options
+HISTSIZE=50000
+SAVEHIST=10000
 setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
 setopt hist_ignore_all_dups
 setopt hist_save_no_dups
-setopt hist_ignore_dups
 setopt hist_find_no_dups
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt share_history          # share command history data
 
 # nvim alias
 alias vim="nvim"
