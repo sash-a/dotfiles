@@ -31,4 +31,12 @@ require("blink.cmp").setup({
 })
 
 -- which LSPs to enable (must be installed with Mason)
-vim.lsp.enable({ 'lua_ls', 'pyright', 'ruff', 'rust_analyzer' })
+vim.lsp.enable({ 'lua_ls', 'pyrefly', 'ruff', 'rust_analyzer' })
+
+vim.lsp.config('ruff', {
+    init_options = {
+        settings = {
+            organizeImports = true
+        }
+    }
+})
