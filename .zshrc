@@ -68,14 +68,48 @@ eval "$(zoxide init zsh --cmd=cd)"
 source <(fzf --zsh)
 
 # shortcuts
-alias sv="source .venv/bin/activate"
+# alias sv="source .venv/bin/activate"
+sv() {
+    source "${1:-.venv}/bin/activate"
+}
 alias se="source .env"
+
+# Sync using mutagen - assumes that directory structure is the same on this and other PC and you want to sync the current directory
+# For safety you can only sync folders within ~/Documents/
+# Example `msync homepc` or `msync 127.0.0.1`
+# Requires that mutagen is installed: https://mutagen.io/documentation/introduction/
+# And device is on the same tailscale network: https://login.tailscale.com/admin/machines
+# `sudo tailscale up`
+msync() {
+    if [[ "$PWD" != "$HOME/Documents/"* ]]; then
+        echo "⛔️ Safety Lock Engaged"
+        echo "   You are currently in: $PWD"
+        echo "   Allowed: Only subfolders inside ~/Documents (e.g., ~/Documents/MyProject)"
+        return 1
+    fi
+
+    # 1. Get the current folder name for the session ID
+    local folder="${PWD##*/}"
+
+    # 2. Convert absolute path to tilde path for the remote
+    local path="${PWD/#$HOME/~}"
+
+    # 3. Run Mutagen
+    /home/linuxbrew/.linuxbrew/bin/mutagen sync create --name="$folder" "$path" "$1:$path"
+}
+
+# Terminate mutagen session in current folder
+mterm() {
+    local folder="${PWD##*/}"
+    /home/linuxbrew/.linuxbrew/bin/mutagen sync terminate "$folder"
+    echo "Terminated mutagen session $folder"
+}
 
 # fzf-tab completion
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --icons=always -1 $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza --icons=always -1 $realpath'
-
+ 
 # Home/end/forward/back word is blocked by one of the plugins
 bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
