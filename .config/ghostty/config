@@ -12,9 +12,11 @@ cursor-style = block
 
 theme = everforrest-dark
 
-# window-height = 800
 maximize = true
+# fullscreen = true
 resize-overlay = always
+window-height = 1920
+window-width = 1080
 
 keybind = ctrl+shift+t=unbind
 keybind = ctrl+shift+left=unbind
