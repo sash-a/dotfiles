@@ -30,9 +30,6 @@ require("blink.cmp").setup({
     fuzzy = { implementation = "prefer_rust_with_warning" }
 })
 
--- which LSPs to enable (must be installed with Mason)
-vim.lsp.enable({ 'lua_ls', 'pyrefly', 'ruff', 'rust_analyzer' })
-
 vim.lsp.config('ruff', {
     init_options = {
         settings = {
@@ -40,3 +37,5 @@ vim.lsp.config('ruff', {
         }
     }
 })
+-- which LSPs to enable (must be installed with Mason)
+vim.lsp.enable({ 'lua_ls', 'ty', 'ruff', 'rust_analyzer' })
