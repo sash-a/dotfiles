@@ -1,9 +1,13 @@
 MiniDeps.add('neovim/nvim-lspconfig') -- default lsp configs
 MiniDeps.add('mason-org/mason.nvim')  -- tool manager - type checkers, linters, etc
-require("mason").setup()
+require("mason").setup({
+    registries = {
+        "github:mason-org/mason-registry",
+        "github:Crashdummyy/mason-registry",
+    },
+})
 
--- show errors only when cursor on line
-vim.diagnostic.config({ virtual_lines = { current_line = true } })
+vim.diagnostic.config({ virtual_lines = false, virtual_text = true })
 
 -- completion
 MiniDeps.add({
@@ -37,5 +41,12 @@ vim.lsp.config('ruff', {
         }
     }
 })
--- which LSPs to enable (must be installed with Mason)
-vim.lsp.enable({ 'lua_ls', 'ty', 'ruff', 'rust_analyzer' })
+
+MiniDeps.add({
+    source = "mason-org/mason-lspconfig.nvim",
+    depends = { "mason-org/mason.nvim", "neovim/nvim-lspconfig" },
+
+})
+require("mason-lspconfig").setup(
+    { ensure_installed = { 'lua_ls', 'ty', 'ruff', 'rust_analyzer', 'csharp_ls' } }
+)

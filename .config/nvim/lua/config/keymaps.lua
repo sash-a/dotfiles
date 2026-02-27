@@ -22,3 +22,8 @@ vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = '[G]o to [i]mplem
 vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = '[G]o to [r]eferences' })
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [a]ction' })
 vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, { desc = '[C]ode [r]ename' })
+
+-- Diagnostic
+vim.keymap.set('n', '<leader>ce', function()
+    vim.diagnostic.open_float({ scope = 'cursor', source = true })
+end, { desc = "[C]ode [E]rror" })

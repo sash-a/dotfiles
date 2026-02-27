@@ -64,8 +64,11 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 # cli tools
 alias cat="bat"
 alias ll="eza --icons=always -1"
-eval "$(zoxide init zsh --cmd=cd)"
 source <(fzf --zsh)
+# Init zoxide if everywhere except in claude code: github.com/anthropics/claude-code/issues/2632
+if [[ "$CLAUDECODE" != "1" ]]; then
+    eval "$(zoxide init --cmd cd zsh)"
+fi
 
 # shortcuts
 # alias sv="source .venv/bin/activate"

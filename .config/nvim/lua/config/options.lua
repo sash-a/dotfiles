@@ -14,6 +14,8 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = true
 vim.o.spell = true
 
+vim.opt.termguicolors = true -- Essential for Ghostty + Everforest
+
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true
 vim.o.smartcase = true

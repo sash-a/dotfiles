@@ -2,7 +2,7 @@
 font-family = FiraCodeNerdFont
 font-size = 13.0
 
-background-opacity = 1.0
+# background-opacity = 1.0
 window-decoration = none
 
 shell-integration = zsh
