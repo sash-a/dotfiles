@@ -1,13 +1,15 @@
 MiniDeps.add({
     source = 'nvim-treesitter/nvim-treesitter',
-    -- Use 'master' while monitoring updates in 'main'
-    checkout = 'master',
+    checkout = 'main',
     monitor = 'main',
-    -- Perform action after every checkout
     hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
 })
 
-require('nvim-treesitter.configs').setup({
-    ensure_installed = { 'lua', 'vimdoc', 'python', 'c_sharp' },
-    highlight = { enable = true },
+require('nvim-treesitter').install({
+    'lua', 'vimdoc', 'python', 'c_sharp', 'markdown', 'markdown_inline',
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'lua', 'help', 'python', 'cs', 'markdown' },
+    callback = function() vim.treesitter.start() end,
 })

@@ -15,10 +15,11 @@ end
 require('mini.deps').setup({ path = { package = path_package } })
 
 require('plugins.colourscheme')
+require('plugins.git')
 require('plugins.lsp')
+require('plugins.markdown')
 require('plugins.mini')
 require('plugins.picker')
 require('plugins.statusline')
 require('plugins.treesitter')
 require('plugins.whichkey')
-require('plugins.git')
