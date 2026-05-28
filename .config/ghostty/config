@@ -14,7 +14,7 @@ theme = everforrest-dark
 
 maximize = true
 # fullscreen = true
-resize-overlay = always
+resize-overlay = never
 window-height = 1920
 window-width = 1080
 
