@@ -16,15 +16,12 @@ antidote load
 # To customize prompt, run `p10k configure` or edit .p10k.zsh.
 [[ ! -f ${ZDOTDIR:-$HOME}/.p10k.zsh ]] || source ${ZDOTDIR:-$HOME}/.p10k.zsh
 
-export TERM="xterm-256color" # This sets up colors properly
 export SHELL=/usr/bin/zsh
 export EDITOR=nvim
 source ~/.profile
 
 # Activate homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-# Point to the correct ZSH otherwise it picks /usr/bin/zsh
-SHELL=/home/linuxbrew/.linuxbrew/bin/zsh
 
 # History suggestion options
 HISTFILE=~/.zsh_history
@@ -46,7 +43,9 @@ autoload -U history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^[[A" history-beginning-search-backward-end
+bindkey "^[OA" history-beginning-search-backward-end
 bindkey "^[[B" history-beginning-search-forward-end
+bindkey "^[OB" history-beginning-search-forward-end
 # Correct delete key behaviour
 bindkey "^[[3~" delete-char
 
@@ -62,6 +61,7 @@ alias ca="conda activate"
 alias dotfiles='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
 # cli tools
+alias zel="zellij"
 alias cat="bat"
 alias ll="eza --icons=always -1"
 source <(fzf --zsh)
@@ -107,6 +107,9 @@ mterm() {
     /home/linuxbrew/.linuxbrew/bin/mutagen sync terminate "$folder"
     echo "Terminated mutagen session $folder"
 }
+
+# Case-insensitive tab completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # fzf-tab completion
 zstyle ':completion:*' menu no
