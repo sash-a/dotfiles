@@ -1,7 +1,4 @@
 {
-  "enabledPlugins": {
-    "superpowers@claude-plugins-official": true
-  },
   "permissions": {
     "allow": [
       "Bash(ls:*)",
@@ -22,13 +19,11 @@
       "Bash(test:*)",
       "Bash(true)",
       "Bash(false)",
-
       "Bash(mkdir:*)",
       "Bash(touch:*)",
       "Bash(cp:*)",
       "Bash(mv:*)",
       "Bash(rm:*)",
-
       "Bash(git status:*)",
       "Bash(git log:*)",
       "Bash(git diff:*)",
@@ -51,7 +46,6 @@
       "Bash(git cherry-pick:*)",
       "Bash(git worktree:*)",
       "Bash(gh:*)",
-
       "Bash(python:*)",
       "Bash(python3:*)",
       "Bash(pip:*)",
@@ -59,19 +53,59 @@
       "Bash(uv:*)",
       "Bash(pytest:*)",
       "Bash(ruff:*)",
-
       "Bash(cargo:*)",
       "Bash(rustc:*)",
       "Bash(rustup:*)",
       "Bash(rust-analyzer:*)",
-
       "Bash(node:*)",
       "Bash(npm:*)",
       "Bash(npx:*)",
-
       "Bash(make:*)",
       "Bash(cmake:*)",
-      "Bash(just:*)"
+      "Bash(just:*)",
+      "Bash(find:*)",
+      "Bash(cat:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(sed:*)",
+      "Bash(awk:*)",
+      "Bash(cut:*)",
+      "Bash(tr:*)",
+      "Bash(xargs:*)",
+      "Bash(tee:*)",
+      "Bash(jq:*)",
+      "Bash(yq:*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(tar:*)",
+      "Bash(gzip:*)",
+      "Bash(gunzip:*)",
+      "Bash(zip:*)",
+      "Bash(unzip:*)",
+      "Bash(chmod:*)",
+      "Bash(chown:*)",
+      "Bash(ln:*)",
+      "Bash(env)",
+      "Bash(printenv:*)",
+      "Bash(printenv)",
+      "Bash(export:*)",
+      "Bash(source:*)",
+      "Bash(ps:*)",
+      "Bash(ps)",
+      "Bash(kill:*)",
+      "Bash(pkill:*)",
+      "Bash(hostname)",
+      "Bash(df:*)",
+      "Bash(df)",
+      "Bash(du:*)",
+      "Bash(free:*)",
+      "Bash(free)",
+      "Bash(docker:*)",
+      "Bash(kubectl:*)",
+      "Bash(helm:*)",
+      "Bash(ssh:*)",
+      "Bash(scp:*)",
+      "Bash(rsync:*)"
     ],
     "deny": [
       "Bash(git push:*)",
@@ -80,6 +114,18 @@
       "Read(**/.env.*)",
       "Read(**/.netrc)"
     ],
-    "ask": []
-  }
+    "ask": [],
+    "defaultMode": "auto"
+  },
+  "model": "opus[1m]",
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true
+  },
+  "theme": "dark",
+  "skipAutoPermissionPrompt": true,
+  "effortLevel": "xhigh"
 }
