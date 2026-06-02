@@ -9,7 +9,7 @@ brew "gemini-cli", link: false
 brew "gh"
 brew "lazygit"
 brew "luarocks"
-brew "mutagen"
+brew "mutagen-io/mutagen/mutagen"
 brew "neovim"
 brew "protobuf"
 brew "python-tk@3.14"
