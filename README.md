@@ -5,11 +5,22 @@ Instead of running the steps above by hand, run:
 bash ~/ubuntu-setup.sh
 ```
 This is idempotent (safe to re-run) and does everything above + VS Code + build
-tools/common utils + an apt update/upgrade + `brew bundle install`.
+tools/common utils + an apt update/upgrade + `brew bundle install` + keyd.
 
 Notes:
 - After it finishes: restart your shell, run `sudo tailscale up`, and (once your
   GitHub SSH key is set up) uncomment `setup_dotfiles` in the script to pull dotfiles.
+
+## keyd (keyboard remapping)
+
+[keyd](https://github.com/rvaiya/keyd) swaps caps/escape and makes caps act as
+control when held. The config is tracked in this repo at `~/.config/keyd/default.conf`
+and the setup script copies it to `/etc/keyd/default.conf` (keyd reads from `/etc`,
+which the dotfiles work-tree can't track directly). After editing the repo config,
+re-apply with:
+```bash
+sudo cp ~/.config/keyd/default.conf /etc/keyd/default.conf && sudo keyd reload
+```
 
 # Manual install:
 ## Bare github repo

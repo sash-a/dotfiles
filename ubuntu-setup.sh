@@ -186,6 +186,41 @@ setup_dotfiles() {
 }
 
 # ----------------------------------------------------------------------------
+# 12. keyd — remap caps<->escape, caps acts as control when held.
+#     Config lives in the repo at ~/.config/keyd/default.conf and is copied
+#     into /etc/keyd/ (which the dotfiles repo can't track directly).
+# ----------------------------------------------------------------------------
+setup_keyd() {
+  if ! have keyd; then
+    log "Building and installing keyd from source"
+    sudo apt-get install -y make gcc
+    local src; src="$(mktemp -d)"
+    git clone https://github.com/rvaiya/keyd "$src"
+    make -C "$src" && sudo make -C "$src" install
+    rm -rf "$src"
+  else
+    ok "keyd already installed"
+  fi
+  log "Installing keyd config to /etc/keyd/default.conf"
+  sudo mkdir -p /etc/keyd
+  sudo cp "$HOME/.config/keyd/default.conf" /etc/keyd/default.conf
+  sudo systemctl enable keyd
+  sudo systemctl restart keyd
+  ok "keyd active (caps=esc/ctrl, esc=caps)"
+}
+
+# ----------------------------------------------------------------------------
+# 13. cleanup — ensure ~/.env exists (sourced by .zshrc)
+# ----------------------------------------------------------------------------
+cleanup() {
+  if [ ! -f "$HOME/.env" ]; then
+    log "Creating empty ~/.env (required by .zshrc)"
+    touch "$HOME/.env"
+  fi
+  ok "~/.env present"
+}
+
+# ----------------------------------------------------------------------------
 # main
 # ----------------------------------------------------------------------------
 mkdir -p /etc/apt/keyrings 2>/dev/null || sudo mkdir -p /etc/apt/keyrings
@@ -196,11 +231,13 @@ setup_flatpak
 setup_tailscale
 setup_ghostty
 setup_vscode
+setup_dotfiles
 setup_homebrew
 setup_claude
 setup_nerd_fonts
 install_packages
-# setup_dotfiles   # uncomment once your GitHub SSH key is configured
+setup_keyd
+cleanup
 
 log "Final apt cleanup"
 sudo apt-get autoremove -y
