@@ -17,8 +17,7 @@ antidote load
 [[ ! -f ${ZDOTDIR:-$HOME}/.p10k.zsh ]] || source ${ZDOTDIR:-$HOME}/.p10k.zsh
 
 export SHELL=/usr/bin/zsh
-export EDITOR=nvim
-source ~/.profile
+export EDITOR=/home/linuxbrew/.linuxbrew/bin/nvim
 
 # Activate homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
