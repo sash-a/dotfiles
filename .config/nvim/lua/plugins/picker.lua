@@ -1,7 +1,7 @@
 MiniDeps.add('nvim-mini/mini.pick')
 require('mini.pick').setup({
     mappings = {
-        move_down      = '<Tab>',
+        move_down      = '<C-n>',
         toggle_preview = '<C-y>',
     }
 })

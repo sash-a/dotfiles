@@ -23,7 +23,6 @@
       "Bash(touch:*)",
       "Bash(cp:*)",
       "Bash(mv:*)",
-      "Bash(rm:*)",
       "Bash(git status:*)",
       "Bash(git log:*)",
       "Bash(git diff:*)",
@@ -46,8 +45,6 @@
       "Bash(git cherry-pick:*)",
       "Bash(git worktree:*)",
       "Bash(gh:*)",
-      "Bash(python:*)",
-      "Bash(python3:*)",
       "Bash(pip:*)",
       "Bash(pip3:*)",
       "Bash(uv:*)",
@@ -57,9 +54,7 @@
       "Bash(rustc:*)",
       "Bash(rustup:*)",
       "Bash(rust-analyzer:*)",
-      "Bash(node:*)",
       "Bash(npm:*)",
-      "Bash(npx:*)",
       "Bash(make:*)",
       "Bash(cmake:*)",
       "Bash(just:*)",
@@ -71,7 +66,6 @@
       "Bash(awk:*)",
       "Bash(cut:*)",
       "Bash(tr:*)",
-      "Bash(xargs:*)",
       "Bash(tee:*)",
       "Bash(jq:*)",
       "Bash(yq:*)",
@@ -82,10 +76,7 @@
       "Bash(gunzip:*)",
       "Bash(zip:*)",
       "Bash(unzip:*)",
-      "Bash(chmod:*)",
-      "Bash(chown:*)",
       "Bash(ln:*)",
-      "Bash(env)",
       "Bash(printenv:*)",
       "Bash(printenv)",
       "Bash(export:*)",
@@ -103,13 +94,10 @@
       "Bash(docker:*)",
       "Bash(kubectl:*)",
       "Bash(helm:*)",
-      "Bash(ssh:*)",
       "Bash(scp:*)",
       "Bash(rsync:*)"
     ],
     "deny": [
-      "Bash(git push:*)",
-      "Bash(git push)",
       "Read(**/.env)",
       "Read(**/.env.*)",
       "Read(**/.netrc)"
@@ -118,14 +106,43 @@
     "defaultMode": "auto"
   },
   "model": "opus[1m]",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "^(startup|resume|clear|compact|fork)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/home/sash/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
-    "superpowers@claude-plugins-official": true
+    "superpowers@claude-plugins-official": false,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "mattpocock-skills@claude-plugins-official": true
   },
-  "theme": "dark",
+  "effortLevel": "xhigh",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  },
+  "tui": "fullscreen",
+  "theme": "auto",
+  "preferredNotifChannel": "notifications_disabled",
   "skipAutoPermissionPrompt": true,
-  "effortLevel": "xhigh"
+  "autoMode": {
+    "allow": [
+      "$defaults",
+      "Bash(uv:*) in /home/sash/Documents/brrrl"
+    ]
+  }
 }

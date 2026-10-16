@@ -1,4 +1,26 @@
 #!/bin/zsh
+# Auto-start zellij.
+# MUST stay above the p10k instant-prompt block below: instant prompt swaps stdin
+# to /dev/null and stdout to a temp file for the rest of .zshrc, so anything
+if [[ -o interactive && -z "$ZELLIJ" && "$TERM_PROGRAM" != herdr ]]; then
+  : ${ZELLIJ_AUTO_ATTACH:=true}   # true -> reuse the session named below; false -> new session each time
+  : ${ZELLIJ_AUTO_EXIT:=false}    # true -> close the terminal when you detach/exit zellij
+  : ${ZELLIJ_SESSION_NAME:=main}
+
+  # brew's shellenv has not run yet at this point, so PATH may not contain zellij.
+  _zj=$(command -v zellij) || _zj=/home/linuxbrew/.linuxbrew/bin/zellij
+
+  if [[ -x $_zj ]]; then
+    if [[ $ZELLIJ_AUTO_ATTACH == true ]]; then
+      "$_zj" attach -c "$ZELLIJ_SESSION_NAME"
+    else
+      "$_zj"
+    fi
+    [[ $ZELLIJ_AUTO_EXIT == true ]] && exit
+  fi
+  unset _zj
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of .zshrc.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"

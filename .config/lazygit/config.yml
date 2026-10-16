@@ -1,0 +1,10 @@
+gui:
+  sidePanelWidth: 0.22 # default 0.3333
+os:
+  editPreset: nvim
+git:
+  diffRenderers:
+    - name: delta side-by-side
+      command: delta --no-gitconfig --dark --paging=never --side-by-side --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+    - name: delta
+      command: delta --no-gitconfig --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"

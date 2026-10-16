@@ -449,7 +449,7 @@ pane_frames false
 // (Requires restart)
 // Default: true (if the host terminal supports it)
 // 
-support_kitty_keyboard_protocol false
+support_kitty_keyboard_protocol true
 // Whether to make sure a local web server is running when a new Zellij session starts.
 // This web server will allow creating new sessions and attaching to existing ones that have
 // opted in to being shared in the browser.
@@ -532,3 +532,8 @@ show_startup_tips false
 // can be useful for removing wrappers around commands
 // Note: be sure to escape backslashes and similar characters properly
 // post_command_discovery_hook "echo $RESURRECT_COMMAND | sed <your_regex_here>"
+
+// Don't resurrect herdr panes: on session resurrection herdr gets spawned before the
+// pane has a size and dies with "terminal reported a zero-sized grid". Empty stdout
+// drops the command so the pane comes back as a plain shell.
+post_command_discovery_hook "case \"$RESURRECT_COMMAND\" in herdr*) ;; *) printf '%s' \"$RESURRECT_COMMAND\" ;; esac"

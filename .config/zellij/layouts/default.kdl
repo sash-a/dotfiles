@@ -96,21 +96,21 @@ layout {
             plugin location="file:/home/sash/.config/zellij/zjstatus.wasm" {
                 hide_frame_for_single_pane "true"
 
-                format_left  "{mode}#[fg=#89B4FA,bg=#2D353B,bold] {session}#[bg=#2D353B] {tabs}"
+                format_left  "{mode}#[fg=#89B4FA,bold] {session} {tabs}"
                 format_right "{datetime}"
-                format_space "#[bg=#2D353B]"
+                format_space ""
 
                 mode_normal          "#[bg=#89B4FA] "
                 mode_tmux            "#[bg=#ffc387] "
                 mode_default_to_mode "tmux"
 
-                tab_normal               "#[fg=#6C7086,bg=#2D353B] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
-                tab_active               "#[fg=#9399B2,bg=#2D353B,bold,italic] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
+                tab_normal               "#[fg=#6C7086] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
+                tab_active               "#[fg=#9399B2,bold,italic] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
                 tab_fullscreen_indicator "[F] "
                 tab_sync_indicator       "[S] "
                 tab_floating_indicator   "[*] "
 
-                datetime          "#[fg=#9399B2,bg=#2D353B] {format} "
+                datetime          "#[fg=#9399B2] {format} "
                 datetime_format   "%A, %d %b %Y %H:%M"
                 datetime_timezone "Europe/Berlin"
             }
